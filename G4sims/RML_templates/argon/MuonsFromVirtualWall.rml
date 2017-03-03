@@ -27,7 +27,7 @@ By default REST units are mm, keV and degrees
 -->
    
 
-    <variable name="REST_NEVENTS" value="100" overwrite="true" />
+    <variable name="REST_NEVENTS" value="10000" overwrite="true" />
    <variable name="WALL_HEIGHT" value="400" overwrite="true" />
    <variable name="WALL_SIZE" value="30" overwrite="true" />
      <variable name="DIR_DATA" value="Muons" overwrite="true" />
@@ -120,7 +120,7 @@ By default REST units are mm, keV and degrees
     <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION].root" />
 </section>
 
-<section TRestG4Metadata name="restG4 Simulation run"  title="LSCMuons_point">
+<section TRestG4Metadata name="restG4 Simulation run"  title="LSCMuons">
 
     <parameter name="geometryPath" value="{IAXOD0_GEOPATH}/{GEO_DIR}" />
     <parameter name="gdml_file" value="IAXOD0_Setup.gdml"/>
@@ -138,8 +138,8 @@ By default REST units are mm, keV and degrees
        <generator type="virtualWall" position="(0,{WALL_HEIGHT},0)" units="mm" size="{WALL_SIZE}" units="mm" rotation="(90,0,0)"  > 
    <source particle="mu-" >
             <energyDist type="TH1D" file="{REST_PATH}/inputData/distributions/Muons.root" spctName="LSCmuon" />
-           <!--    <angularDist type="TH1D" file="{REST_PATH}/inputData/distributions/CosmicAngles.root" spctName="Theta2" /> -->
-    <angularDist type="flux" direction="(0,-1,0)" />  <!--to check events -->
+             <angularDist type="TH1D" file="{REST_PATH}/inputData/distributions/CosmicAngles.root" spctName="Theta2" /> 
+  <!--  <angularDist type="flux" direction="(0,-1,0)" /> --> <!--to check events -->
      </source> 
     </generator>
 
