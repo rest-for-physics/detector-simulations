@@ -2,7 +2,7 @@
 
 <!DOCTYPE gdml [
 <!ENTITY geometry SYSTEM "IAXOD0_Geometry.gdml">
-<!ENTITY materials SYSTEM "materials.xml">
+<!ENTITY materials SYSTEM "../materials.xml">
 ]>
 
 <gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
@@ -12,7 +12,7 @@
     <constant name="PI" value="3.14159265358979323846264" />
     <constant name="degToRad" value="PI/180." />
 
-    <constant name="world_size" value="10000"/>
+    <constant name="world_size" value="1000"/> <!-- try to keep that small to avoid interactions inside -->
 
     <variable name="targetGasDensity" value="2.199218"/> <!-- mg/cm3 -->
     <variable name="quencherDensity" value="0.0676"/> <!-- mg/cm3 -->
@@ -45,7 +45,7 @@
     <variable name="copperFlangeExtRad" value="57.5"/>
     <variable name="pipeLength" value="400"/>
     <variable name="pipeThickness" value="10"/>
-    <variable name="LeadBoxShift" value="50"/>
+    <variable name="LeadBoxShift" value="25"/>
     <variable name="LeadBoxSize" value="550"/>
     <variable name="LeadHolePipeSize" value="50"/>
     <variable name="LeadHoleDetectorSize" value="150"/>
@@ -57,7 +57,7 @@
     <position name="pipePos0" unit="mm" x="0" y="0" z="-pipeLength/2.+copperFlangeThickness/2."/>
     <position name="pipePos1" unit="mm" x="0" y="0" z="pipeLength/2.-copperFlangeThickness/2."/>
     <position name="LeadHolePipePos" unit="mm" x="0" y="0" z="LeadBoxSize/2."/>
-    <position name="LeadHoleRaquettePos" unit="mm" x="-(raquetteLength+10)/2." y="0" z="-chamberLength/2.-raquetteThickness/2."/>
+    <position name="LeadHoleRaquettePos" unit="mm" x="-(raquetteLength+10)/2." y="0" z="-chamberLength/2.-raquetteThickness/2.-LeadBoxShift"/>
     <variable name="cathodePatternThickness" value="3"/>
     <variable name="cathodePattern0Rad" value="4.25"/>
     <variable name="cathodePattern0Width" value="0.3"/>

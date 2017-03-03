@@ -177,6 +177,7 @@
                  
     </solids>
     
+
     <structure>
        <!-- {{{ Volumes definition (material and solid assignment) -->
        <volume name="gasVolume">
@@ -377,7 +378,6 @@
                 <volumeref ref="vacuumCathodePatternVolume"/>
                 <position name="vacuumCathodePatternPosition" unit="mm" x="0" y="0" z="chamberLength/2.+cathodePatternThickness/2."/>
             </physvol>
-            <!--{{{  }}} -->
             
             <physvol name="LeadShielding">
                 <volumeref ref="LeadBoxVolume"/>
