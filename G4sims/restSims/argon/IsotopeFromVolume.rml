@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!-- Constructing XML-like REST metadata input file
+     File : config.rml
+     First concept author J. Galan (26-Apr-2015)
+     Modified for IAXOD0 background model by G. Luzon & E. Ruiz-Chóliz (March-2016)
+
+     Any commented text will just not end up in the configBuffer inside TRestMetadata 
+     We can comment out pieces of configuration using XML commenting style.
+
+     By default REST units are mm, keV and degrees
+-->
+<environment>
+
+    <!-- <variable name="REST_DATAPATH" value="/media/storage/restData" overwrite="true" /> -->
+    <variable name="REST_DATAPATH" value="/home/elisa/REST_v2_data/" overwrite="true" />
+    <variable name="EXPERIMENT" value="IAXOD0" overwrite="false" />
+    <variable name="VERSION" value="1.0" overwrite="false" />
+    <variable name="IAXOD0_PATH" value="/home/elisa/IAXOD0-REST/" overwrite="true" />
+    <variable name="IAXOD0_DATAPATH" value="${REST_DATAPATH}/IAXOD0" overwrite="true" />
+    <variable name="IAXOD0_G4PATH" value="${IAXOD0_PATH}/G4sims/" overwrite="true" />
+    <variable name="IAXOD0_GEOPATH" value="${IAXOD0_G4PATH}/geometry" overwrite="true" />
+    <variable name="IAXOD0_GEODIR" value="Argon" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
+    <variable name="IAXOD0_GAS"   value="Argon-Isobutane 2Pct 10-10E3V/cm" overwrite="true" />  <!-- options "Argon-Isobutane 2Pct 10-10E3V/cm", "Xenon-Isobutane 2Pct 10-10E3V/cm" or any other gas in gases.rml file-->
+
+    <!-- Default for G4 simulations (defined in .sh script)-->
+   
+    <variable name="REST_NEVENTS" value="1000000" overwrite="true" />
+    <variable name="REST_ISOTOPE" value="Pb210" overwrite="true" /> <!-- Options: "Ar39", "Pb210" -->   
+    <variable name="REST_VOLUME" value="LeadShielding" overwrite="true" /> <!-- Options: "gas", "LeadShielding" --> 
+
+    <variable name="DIR_DATA" value="Pb210Shielding" overwrite="true" />  <!-- Options: "Ar39Gas", "Pb210Shielding" --> 
+    
+</environment>
+
+<globals>
+    <parameter name="mainDataPath" value="${IAXOD0_DATAPATH}/${IAXOD0_GEODIR}/${DIR_DATA}" />
+    <parameter name="gasDataPath" value="${REST_PATH}/inputData/gasFiles/" />
+    <parameter name="verboseLevel" value="warning" /> %options are : silent, warning, info, debug
+</globals>
+
+
+<section TRestRun name="Background Model" title="Simulations ${EXPERIMENT}. Version ${VERSION}.">
+    <parameter name="experiment" value="${EXPERIMENT}"/>
+    <parameter name="runType" value="simulation"/>
+    <parameter name="runNumber" value="auto"/>
+    <parameter name="runTag" value="${REST_ISOTOPE}_ArIso"/>
+    <parameter name="runDescription" value="We launch ${REST_ISOTOPE} decays from ${REST_VOLUME}."/>
+    <parameter name="user" value="${USER}"/>
+    <parameter name="verboseLevel" value="3"/>
+    <parameter name="overwrite" value="off" />
+    <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION].root" />
+</section>
+
+
+<section TRestG4Metadata name="restG4 Simulation run"  title="${REST_ISOTOPE} from ${REST_VOLUME}">
+
+    <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
+    <parameter name="gdml_file" value="IAXOD0_Setup_new.gdml"/>
+    <parameter name="maxTargetStepSize" value="200" units="um" />
+    <parameter name="subEventTimeDelay" value="100" units="us" />
+
+    <!-- A member to store the component activity (and mass) are now present in G4Metadata -->
+    <parameter name="activity" value="100" />
+    <parameter name="mass" value="1.0" />
+
+    <!-- The number of events to be simulated is now defined in TRestG4Metadata -->
+
+    <parameter name="Nevents" value="${REST_NEVENTS}" />
+
+    <generator type="volume" from="${REST_VOLUME}" >
+        <source particle="${REST_ISOTOPE}" fullChain="on" >
+	    <angularDist type="isotropic" />
+	    <energyDist type="mono" energy="0" units="keV" />
+        </source> 
+    </generator>
+
+    <biasing value="off" type="virtualBox">
+        <biasingVolume size="2850" units="mm" position="(0,0,0)" units="mm" factor="10" energyRange="(2.4,5)" units="MeV" />
+        <biasingVolume size="2450" units="mm" position="(0,0,0)" units="mm" factor="10" energyRange="(2.4,5)" units="MeV" />
+        <biasingVolume size="2050" units="mm" position="(0,0,0)" units="mm" factor="10" energyRange="(2.4,5)" units="MeV" />
+    </biasing>
+
+   <storage sensitiveVolume="gas">
+        <parameter name="energyRange" value="(0,5)" units="GeV" />
+        <activeVolume name="gas" chance="1"/>		 	<!-- Volume 0 -->
+        <activeVolume name="vetoFront" chance="1"/>	 	<!-- Volume 1 -->
+        <activeVolume name="vetoBack" chance="1"/>	 	<!-- Volume 2 -->
+        <activeVolume name="vetoTop" chance="1"/>	 	<!-- Volume 3 -->
+        <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
+        <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
+        <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
+        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
+        <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 --> 	
+	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
+	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	
+    </storage>
+
+</section>
+
+<section TRestPhysicsLists name="default" title="First physics list implementation." verboseLevel="debug" >
+
+    <parameter name="cutForGamma" value="10" units="um" />
+    <parameter name="cutForElectron" value="1" units="mm" />
+    <parameter name="cutForPositron" value="1" units="mm" />
+
+    <!-- EM Physics lists -->
+    <physicsList name="G4EmLivermorePhysics"> </physicsList>
+    <!-- <physicsList name="G4EmPenelopePhysics"> </physicsList> -->
+    <!-- <physicsList name="G4EmStandardPhysics_option3"> </physicsList> -->
+
+    <!-- Decay physics lists -->
+    <physicsList name="G4DecayPhysics"> </physicsList>
+    <physicsList name="G4RadioactiveDecayPhysics"> </physicsList>
+    <physicsList name="G4RadioactiveDecay"> 
+        <option name="ICM" value="true" />
+        <option name="ARM" value="false" />
+    </physicsList>
+
+    <!-- Hadron physics lists -->
+    <physicsList name="G4HadronElasticPhysicsHP"> </physicsList>
+    <physicsList name="G4IonBinaryCascadePhysics"> </physicsList>
+    <physicsList name="G4HadronPhysicsQGSP_BIC_HP"> </physicsList>
+    <physicsList name="G4NeutronTrackingCut"> </physicsList>
+    <physicsList name="G4EmExtraPhysics"> </physicsList>
+
+</section>
+
+
+
