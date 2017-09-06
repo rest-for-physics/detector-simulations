@@ -34,7 +34,7 @@
     <tube name="copperFlangeExt" startphi="0" deltaphi="360" rmin="copperFlangeHole" rmax="copperFlangeExtRad" z="copperFlangeThickness" aunit="deg" lunit="mm" />
     <tube name="teflonPipe" startphi="0" deltaphi="360" rmin="copperFlangeHole-teflonThickness" rmax="copperFlangeHole" z="pipeLength" aunit="deg" lunit="mm" />
     <tube name="teflonCoverCathode" startphi="0" deltaphi="360" rmin="copperFlangeHole-teflonThickness" rmax="cathodeHole" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness " aunit="deg" lunit="mm" />
-    <tube name="VacuumPipeComplete" startphi="0" deltaphi="360" rmin="0" rmax="copperFlangeHole-teflonThickness" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength" aunit="deg" lunit="mm" />
+    <tube name="VacuumPipe" startphi="0" deltaphi="360" rmin="0" rmax="copperFlangeHole-teflonThickness" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength" aunit="deg" lunit="mm" />
 
     <!-- Cathode Pattern -->
 
@@ -62,10 +62,6 @@
     <box name="scintillatorTopBox" x="LeadBoxSize+2*scintillatorVetoWidth" y="scintillatorVetoWidth" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" />
     <box name="scintillatorLatBox" x="scintillatorVetoWidth" y="LeadBoxSize" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" />
     <box name="scintillatorHoleFront" x="60" y="60" z="scintillatorVetoWidth+20" lunit="mm" />
-
-    <!-- Source -->
-
-    <sphere name="sourceSphere" rmax="sourceRad" deltaphi="2*PI" deltatheta="PI"/>
 
     <!-- Substractions and unions .................................................................-->
       
@@ -200,12 +196,6 @@
          <second ref="LeadHoleRaquette"/>
          <positionref ref="LeadHoleRaquettePos"/>
     </subtraction>
-
-    <subtraction name="VacuumPipe">
-         <first ref="VacuumPipeComplete"/>
-         <second ref="sourceSphere"/>
-         <positionref ref="sourcePosinTube"/>
-    </subtraction>
                  
 </solids>
     
@@ -274,7 +264,7 @@
     </volume>
        
     <volume name="VacuumPipeVolume">
-        <materialref ref="Vacuum"/>
+        <materialref ref="Air"/>
         <solidref ref="VacuumPipe"/>
     </volume>
        
@@ -284,7 +274,7 @@
     </volume>
         
     <volume name="vacuumCathodePatternVolume">
-        <materialref ref="Vacuum"/>
+        <materialref ref="Air"/>
         <solidref ref="vacuumCathodePattern"/>
     </volume>
       
@@ -327,11 +317,6 @@
         <materialref ref="Lead"/>
         <solidref ref="LeadTopBox"/>
     </volume>-->
-
-    <volume name="SourceSphereVolume">
-        <materialref ref="Aluminum"/>
-        <solidref ref="sourceSphere"/>
-    </volume>
         	
     <!-- Physical volume definition (volume and position assignment) ..............................-->
         
@@ -454,11 +439,6 @@
             <volumeref ref="LeadTopVolume"/>
             <position name="LeadTopPosition" unit="mm" x="0" y="LeadBoxSize/2. + scintillatorVetoWidth+LeadTopThickness/2." z="LeadBoxShift"/>
         </physvol> -->
-
-        <physvol name="SourceSphere">
-            <volumeref ref="SourceSphereVolume"/>
-            <positionref ref="sourcePos"/>
-        </physvol>
 
     </volume>
 

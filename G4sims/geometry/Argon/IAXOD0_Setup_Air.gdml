@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
 <!DOCTYPE gdml [
-<!ENTITY geometry SYSTEM "IAXOD0_Geometry_source.gdml">
+<!ENTITY geometry SYSTEM "IAXOD0_Geometry_Air.gdml">
 <!ENTITY materials SYSTEM "../materials.xml">
 ]>
 
@@ -96,12 +96,6 @@
     <!-- Scintillators -->
 
     <variable name="scintillatorVetoWidth" value="50"/>
-
-    <!-- Source -->
-    <variable name="sourceRad" value="2.5"/>
-    <variable name="sourceZdist" value="100"/>
-    <position name="sourcePos" unit="mm" x="0" y="0" z="chamberLength/2+cathodePatternThickness+sourceRad+sourceZdist"/>
-    <position name="sourcePosinTube" unit="mm" x="0" y="0" z="-(copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength)/2+sourceZdist+sourceRad"/>
 
 </define>
 

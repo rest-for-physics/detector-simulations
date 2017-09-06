@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
 <!DOCTYPE gdml [
-<!ENTITY geometry SYSTEM "IAXOD0_Geometry_new.gdml">
-<!ENTITY materials SYSTEM "../materials_new.xml">
+<!ENTITY geometry SYSTEM "IAXOD0_Geometry_Vac.gdml">
+<!ENTITY materials SYSTEM "../materials.xml">
 ]>
 
 <gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
@@ -89,7 +89,7 @@
     <variable name="LeadBoxSize" value="550"/>
     <variable name="LeadHolePipeSize" value="50"/>
     <variable name="LeadHoleDetectorSize" value="150"/>
-    <variable name="LeadTopThickness" value="50"/>
+    <!-- <variable name="LeadTopThickness" value="50"/> -->
     <position name="LeadHolePipePos" unit="mm" x="0" y="0" z="LeadBoxSize/2."/>
     <position name="LeadHoleRaquettePos" unit="mm" x="-(raquetteLength+10)/2." y="0" z="-chamberLength/2.-raquetteThickness/2.-LeadBoxShift"/>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
 <!DOCTYPE gdml [
-<!ENTITY geometry SYSTEM "IAXOD0_Geometry_source.gdml">
+<!ENTITY geometry SYSTEM "IAXOD0_Geometry_noShielding.gdml">
 <!ENTITY materials SYSTEM "../materials.xml">
 ]>
 
@@ -85,23 +85,17 @@
 
     <!-- Lead Shielding -->
 
-    <variable name="LeadBoxShift" value="25"/>
+    <!-- <variable name="LeadBoxShift" value="25"/>
     <variable name="LeadBoxSize" value="550"/>
     <variable name="LeadHolePipeSize" value="50"/>
     <variable name="LeadHoleDetectorSize" value="150"/>
-    <!-- <variable name="LeadTopThickness" value="50"/> -->
+    <variable name="LeadTopThickness" value="50"/>
     <position name="LeadHolePipePos" unit="mm" x="0" y="0" z="LeadBoxSize/2."/>
-    <position name="LeadHoleRaquettePos" unit="mm" x="-(raquetteLength+10)/2." y="0" z="-chamberLength/2.-raquetteThickness/2.-LeadBoxShift"/>
+    <position name="LeadHoleRaquettePos" unit="mm" x="-(raquetteLength+10)/2." y="0" z="-chamberLength/2.-raquetteThickness/2.-LeadBoxShift"/> -->
 
     <!-- Scintillators -->
 
     <variable name="scintillatorVetoWidth" value="50"/>
-
-    <!-- Source -->
-    <variable name="sourceRad" value="2.5"/>
-    <variable name="sourceZdist" value="100"/>
-    <position name="sourcePos" unit="mm" x="0" y="0" z="chamberLength/2+cathodePatternThickness+sourceRad+sourceZdist"/>
-    <position name="sourcePosinTube" unit="mm" x="0" y="0" z="-(copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength)/2+sourceZdist+sourceRad"/>
 
 </define>
 

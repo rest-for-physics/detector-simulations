@@ -34,7 +34,7 @@
     <tube name="copperFlangeExt" startphi="0" deltaphi="360" rmin="copperFlangeHole" rmax="copperFlangeExtRad" z="copperFlangeThickness" aunit="deg" lunit="mm" />
     <tube name="teflonPipe" startphi="0" deltaphi="360" rmin="copperFlangeHole-teflonThickness" rmax="copperFlangeHole" z="pipeLength" aunit="deg" lunit="mm" />
     <tube name="teflonCoverCathode" startphi="0" deltaphi="360" rmin="copperFlangeHole-teflonThickness" rmax="cathodeHole" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness " aunit="deg" lunit="mm" />
-    <tube name="VacuumPipeComplete" startphi="0" deltaphi="360" rmin="0" rmax="copperFlangeHole-teflonThickness" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength" aunit="deg" lunit="mm" />
+    <tube name="VacuumPipe" startphi="0" deltaphi="360" rmin="0" rmax="copperFlangeHole-teflonThickness" z="copperCathodeThickness+copperChamberTopThickness-cathodePatternThickness+pipeLength" aunit="deg" lunit="mm" />
 
     <!-- Cathode Pattern -->
 
@@ -50,11 +50,11 @@
 
     <!-- Lead Shielding -->
 
-    <box name="LeadBoxFull" x="LeadBoxSize" y="LeadBoxSize" z="LeadBoxSize" lunit="mm" />
+    <!-- <box name="LeadBoxFull" x="LeadBoxSize" y="LeadBoxSize" z="LeadBoxSize" lunit="mm" />
     <box name="LeadHoleDetector" x="LeadHoleDetectorSize" y="LeadHoleDetectorSize" z="LeadHoleDetectorSize" lunit="mm" />
     <box name="LeadHolePipe" x="LeadHolePipeSize" y="LeadHolePipeSize" z="LeadBoxSize" lunit="mm" />
     <box name="LeadHoleRaquette" x="raquetteLength+10" y="raquetteWidth+10" z="raquetteThickness+10" lunit="mm" />
-    <!-- <box name="LeadTopBox" x="LeadBoxSize+2*scintillatorVetoWidth" y="LeadTopThickness" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" /> -->
+    <box name="LeadTopBox" x="LeadBoxSize+2*scintillatorVetoWidth" y="LeadTopThickness" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" /> -->
 
     <!-- Scintillators -->
 
@@ -62,10 +62,6 @@
     <box name="scintillatorTopBox" x="LeadBoxSize+2*scintillatorVetoWidth" y="scintillatorVetoWidth" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" />
     <box name="scintillatorLatBox" x="scintillatorVetoWidth" y="LeadBoxSize" z="LeadBoxSize+2*scintillatorVetoWidth" lunit="mm" />
     <box name="scintillatorHoleFront" x="60" y="60" z="scintillatorVetoWidth+20" lunit="mm" />
-
-    <!-- Source -->
-
-    <sphere name="sourceSphere" rmax="sourceRad" deltaphi="2*PI" deltatheta="PI"/>
 
     <!-- Substractions and unions .................................................................-->
       
@@ -184,7 +180,7 @@
           <second ref="cathodePattern"/>
     </subtraction>
       
-    <subtraction name="LeadBox1">
+    <!-- <subtraction name="LeadBox1">
           <first ref="LeadBoxFull"/>
           <second ref="LeadHoleDetector"/>
     </subtraction>
@@ -199,13 +195,7 @@
          <first ref="LeadBox2"/>
          <second ref="LeadHoleRaquette"/>
          <positionref ref="LeadHoleRaquettePos"/>
-    </subtraction>
-
-    <subtraction name="VacuumPipe">
-         <first ref="VacuumPipeComplete"/>
-         <second ref="sourceSphere"/>
-         <positionref ref="sourcePosinTube"/>
-    </subtraction>
+    </subtraction> -->
                  
 </solids>
     
@@ -288,10 +278,10 @@
         <solidref ref="vacuumCathodePattern"/>
     </volume>
       
-    <volume name="LeadBoxVolume">
+    <!-- <volume name="LeadBoxVolume">
         <materialref ref="Lead"/>
         <solidref ref="LeadBox"/>
-    </volume>
+    </volume> -->
                     
     <volume name="scintillatorFrontVolume">
         <materialref ref="BC408"/>
@@ -327,11 +317,6 @@
         <materialref ref="Lead"/>
         <solidref ref="LeadTopBox"/>
     </volume>-->
-
-    <volume name="SourceSphereVolume">
-        <materialref ref="Aluminum"/>
-        <solidref ref="sourceSphere"/>
-    </volume>
         	
     <!-- Physical volume definition (volume and position assignment) ..............................-->
         
@@ -415,10 +400,10 @@
             <position name="vacuumCathodePatternPosition" unit="mm" x="0" y="0" z="chamberLength/2.+cathodePatternThickness/2."/>
         </physvol>
             
-        <physvol name="LeadShielding">
+        <!-- <physvol name="LeadShielding">
             <volumeref ref="LeadBoxVolume"/>
             <position name="LeadBoxPosition" unit="mm" x="0" y="0" z="LeadBoxShift"/>
-        </physvol>
+        </physvol> -->
             
         <physvol name="vetoFront">
             <volumeref ref="scintillatorFrontVolume"/>
@@ -454,11 +439,6 @@
             <volumeref ref="LeadTopVolume"/>
             <position name="LeadTopPosition" unit="mm" x="0" y="LeadBoxSize/2. + scintillatorVetoWidth+LeadTopThickness/2." z="LeadBoxShift"/>
         </physvol> -->
-
-        <physvol name="SourceSphere">
-            <volumeref ref="SourceSphereVolume"/>
-            <positionref ref="sourcePos"/>
-        </physvol>
 
     </volume>
 

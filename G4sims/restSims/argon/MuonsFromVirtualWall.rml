@@ -49,11 +49,11 @@
     <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION].root" />
 </section>
 
-<section TRestG4Metadata name="restG4 Simulation run"  title="Surface Muons">
+<section TRestG4Metadata name="restG4 Simulation run"  title="Muons_ArIso">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
     <parameter name="gdml_file" value="IAXOD0_Setup_new.gdml"/>
-    <parameter name="maxTargetStepSize" value="200" units="um" />
+    <parameter name="maxTargetStepSize" value="100" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
     <!-- A member to store the component activity (and mass) are now present in G4Metadata -->
@@ -63,7 +63,7 @@
     <!-- The number of events to be simulated is now defined in TRestG4Metadata -->
     <parameter name="Nevents" value="${REST_NEVENTS}" />
     
-    <generator type="virtualWall" position="(0,450,25)" units="mm" size="1000" units="mm" rotation="(90,0,0)"  > 
+    <generator type="virtualWall" position="(0,450,25)" units="mm" size="1000" units="mm" rotation="(90,0,0)"  > <!-- position="(0,450,25)" -->
         <source particle="mu-" >
             <energyDist type="TH1D" file="${REST_PATH}/inputData/distributions/Muons.root" spctName="cosmicmuon" />
             <angularDist type="TH1D" file="${REST_PATH}/inputData/distributions/CosmicAngles.root" spctName="Theta2" />
@@ -85,7 +85,7 @@
         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
+        <!-- <activeVolume name="LeadTop" chance="1"/> -->		<!-- Volume 7 -->
         <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 -->
 	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
 	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	
@@ -95,14 +95,18 @@
 
 <section TRestPhysicsLists name="default" title="First physics list implementation." verboseLevel="debug" >
 
-    <parameter name="cutForGamma" value="10" units="um" />
+    <parameter name="cutForGamma" value="1" units="um" />
     <parameter name="cutForElectron" value="1" units="mm" />
     <parameter name="cutForPositron" value="1" units="mm" />
+    <parameter name="cutForMuon" value="0.001" units="um" />
+    <parameter name="cutForNeutron" value="1" units="mm" />
+    <parameter name="minEnergyRangeProductionCuts" value="1" units="keV" />
+    <parameter name="maxEnergyRangeProductionCuts" value="1" units="GeV" /> 
 
     <!-- EM Physics lists -->
-    <physicsList name="G4EmLivermorePhysics"> </physicsList>
+    <!-- <physicsList name="G4EmLivermorePhysics"> </physicsList> -->
     <!-- <physicsList name="G4EmPenelopePhysics"> </physicsList> -->
-    <!-- <physicsList name="G4EmStandardPhysics_option3"> </physicsList> -->
+    <physicsList name="G4EmStandardPhysics_option3"> </physicsList>
 
     <!-- Decay physics lists -->
     <physicsList name="G4DecayPhysics"> </physicsList>
@@ -123,7 +127,7 @@
 
 <section TRestGas nameref="${IAXOD0_GAS}" file="${REST_PATH}/inputData/definitions/gases.rml"> </section>
 
-<section TRestReadout nameref="Readout_IAXOD0_v1" file="$/home/elisa/IAXOD0-REST/G4sims/geometry/readouts.rml"> </section>
+<section TRestReadout nameref="IAXOD0_Readout_v2" file="$/home/elisa/IAXOD0-REST/G4sims/geometry/IAXOD0_Readout_v2_45deg.root"> </section>
 
 
 
