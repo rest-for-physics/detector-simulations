@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!-- ................................................................................. -->
+
+<section TRestElectronDiffusionProcess name="Ar2Iso_electronDiffusion-1kVcm-1.4atm" title="Ar2Iso" >
+    <parameter name="electricField" value="1" units="kV/cm" />
+    <parameter name="attachment" value="0" /> <!-- units?? -->
+
+    <!-- We can re-define the value of the pressure inside TRestGas using this parameter -->
+    <parameter name="gasPressure" value="1.4" />
+
+    <!-- The following parameters will override the values given by the defined gas properties in TRestGas stored in TRestRun.
+         As soon as the parameter is not defined, the value will be obtained from TRestGas metadata.
+         If all these parameters are provided with a value, there is no need for the electron diffusion process to use the gas definition. 
+         Thus, it should not complain in case there is no existing TRestGas definition inside TRestRun. -->
+
+    <parameter name="longitudinalDiffusionCoefficient" value="0.02519" /> <!-- Ne~ 0,01072, Ar 0.01335 -->
+    <!-- diffusion coefficient units are in cm^1/2 (this must be added to TRestSystemOfUnits.h) -->
+
+    <parameter name="transversalDiffusionCoefficient" value="0.06588" /> <!-- Ne~ 0,01682, Ar 0.0221 , no value .. it will be take from gas file-->
+    <!-- diffusion coefficient units are in cm^1/2 (this must be added to TRestSystemOfUnits.h) -->
+
+    <parameter name="Wvalue" value="26.238" units="eV" /> <!-- Ar~ 26.3, Ne 36.4, Ar2Iso 26.238 -->
+
+    <!-- <parameter name="maxHits" value="5000000" units="eV" /> -->
+
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestAvalancheProcess name="avalancheProcess"  title="IAXOD0 chamber" >
+    <parameter name="energyReference" value="5.9" units="keV" /> 
+    <parameter name="resolutionReference" value="18" /> <!-- fwhm -->
+    <parameter name="detectorGain" value="8000" /> <!-- absolute gain --> 
+    <!-- <parameter name="electronicsGain" value="671744" /> --> <!--electrons for 4096 ADC units -->
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestHitsToSignalProcess name="hitsToSignal-Template" title="A hits to signal template" >
+    <parameter name="sampling" value="0.2" units="us" />
+    <parameter name="electricField" value="1000" units="V/cm" />
+    <!-- If specified, the following parameters will modify the properties of the gas found in TRestGas -->
+    <parameter name="gasPressure" value="" />
+    <parameter name="driftVelocity" value="" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestGaussianConvolutionProcess name="gaussian-Convolution"  title="Gaussian convolution of signals" >
+    <parameter name="sigma" value="0.01" units="us" /> 
+    <parameter name="nSigmas" value="5" />  <!-- Number of sigmas to perform the calculation -->
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestAddSignalNoiseProcess name="addSignalNoiseProcess" title="Test AddNoise to Signal" >
+    <parameter name="noiseLevel" value="5" /> <!-- electrons in each time bin -->
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestSmearingProcess name="hitsSmearing" title="Template IAXOD0" >
+    <parameter name="energyReference" value="5.9" />
+    <parameter name="resolutionReference" value="18" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestHitsReductionProcess name="hitsReduction-Template" title="Template IAXOD0" >
+    <parameter name="startingDistance" value="1" units="mm" />
+    <parameter name="minimumDistance" value="5" units="mm" />
+    <parameter name="distanceStepFactor" value="1.25" />
+    <parameter name="maxNodes" value="10" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestFastHitsToTrackProcess name="fastHitsToTrack-Template" title="Template IAXOD0" >
+    <parameter name="cellResolution" value="5" units="mm" />
+    <parameter name="netSize" value="400" units="mm" />
+    <parameter name="netOrigin" value="(-200,-200,-200)" units="mm" /> MIRAR EN EL GEO!!!!!
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestTrackReconnectionProcess name="trackReconnection-Template" title="Template ESS" >
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestTrackPathMinimizationProcess name="trackPathMinimization-Template" title="Template IAXOD0" >
+    <parameter name="energyThreshold" value="0.2" />
+    <parameter name="maxNodes" value="50" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestGeant4AnalysisProcess name="g4Ana" title="Geant4 analysis template" >
+    <!-- Volume observables
+         You may define an observable with the energy deposited in any active volume in the restG4 simulation.
+         This observable must be defined as : [VOL_NAME]EDep (i.e. gasEDep, vesselEDep )
+         Here -EDep- and -MeanPos- are key words, and it is recommended not to use them in the definition of other observables -->
+
+    <!-- Energy Deposited -->
+    <observable name="gasVolumeEDep" value="ON"
+        description="Energy deposited in the gas volume in keV" />
+    <observable name="vetoFrontVolumeEDep" value="ON"
+        description="Energy deposited in the front veto volume in keV" />
+    <observable name="vetoBackVolumeEDep" value="ON"
+        description="Energy deposited in the back veto volume in keV" />
+    <observable name="vetoTopVolumeEDep" value="ON"
+        description="Energy deposited in the top veto volume in keV" />
+    <observable name="vetoBottomVolumeEDep" value="ON"
+        description="Energy deposited in the bottom veto volume in keV" />
+    <observable name="vetoEastVolumeEDep" value="ON"
+        description="Energy deposited in the east veto volume in keV" />
+    <observable name="vetoWestVolumeEDep" value="ON"
+        description="Energy deposited in the west veto volume in keV" />
+    <!-- <observable name="LeadTopVolumeEDep" value="ON"
+        description="Energy deposited in the top lead volume in keV" /> -->
+    <observable name="LeadShieldingVolumeEDep" value="ON"
+        description="Energy deposited in the lead shielding volume in keV" />
+    <observable name="mylarCatVolumeEDep" value="ON"
+        description="Energy deposited in the mylar volume in keV" />
+    <observable name="CuCathodePatternVolumeEDep" value="ON"
+        description="Energy deposited in the copper cathode spider volume in keV" />
+    <!-- Notice that total is not a volume but totalEdep is an observable hard-coded inside the analysis process.
+         That is why we write Edep and not EDep, which is a reserved word. -->
+    <observable name="totalEdep" value="ON"
+        description="Total energy deposited in all the volumes in keV" />
+
+    <!-- Interaction type -->
+    <observable name="photoelectric" value="ON"
+        description="Its value will be 1 if the event contains a photoelectric interaction." />
+    <observable name="compton" value="ON"
+        description="Its value will be 1 if the event contains a compton scattering process." />
+    <observable name="bremstralung" value="OFF"
+        description="Its value will be 1 if the event contains a bremstralung physics process." />    
+    <observable name="hadElastic" value="ON"
+        description="Its value will be 1 if the event contains a hadElastic physics process." />
+    <observable name="photonNuclear" value="OFF"
+        description="Its value will be 1 if the event contains a photonNuclear physics process." /> 
+    <observable name="nCapture" value="OFF"
+        description="Its value will be 1 if the event contains a nCapture physics process." /> 
+
+    <!-- Track information -->        
+    <observable name="neutronTracksCounter" value="ON"
+        description="number of neutron tracks" />
+    <observable name="neutron" value="ON"
+        description="Tnumber of neutrons" />
+    <observable name="muonTracksEDep" value="ON"
+        description="Energy deposited by muon tracks" />
+    <observable name="muonTracksCounter" value="ON"
+        description="number of muon tracks" />
+    <observable name="alphaTracksEDep" value="ON"
+        description="energy deposited by neutron tracks" /> 
+    <observable name="alphaTracksCounter" value="ON"
+        description="number of neutron tracks" />
+    <observable name="Li7TracksEDep" value="ON"
+        description="energy deposited by neutron tracks" />    
+    <observable name="Li7TracksCounter" value="ON"
+        description="number of neutron tracks" />   
+    <observable name="gammaTracksEDep" value="ON"
+        description="energy deposited by neutron tracks" /> 
+    <observable name="gammaTracksCounter" value="ON"
+        description="number of neutron tracks" />
+  
+    <!-- Mean Positions -->
+    <observable name="gasMeanPosX" value="ON"
+        description="Mean X position in the gas volume in keV" />
+    <observable name="gasMeanPosY" value="ON"
+        description="Mean Y position in the gas volume in keV" />
+    <observable name="gasMeanPosZ" value="ON"
+        description="Mean Z position in the gas volume in keV" />
+
+    <observable name="vetoFrontMeanPosX" value="ON"
+        description="Mean X position in the front veto volume in keV" />
+    <observable name="vetoFrontMeanPosY" value="ON"
+        description="Mean Y position in the front veto volume in keV" />
+    <observable name="vetoFrontMeanPosZ" value="ON"
+        description="Mean Z position in the front veto volume in keV" />
+
+    <observable name="vetoBackMeanPosX" value="ON"
+        description="Mean X position in the back veto volume in keV" />
+    <observable name="vetoBackMeanPosY" value="ON"
+        description="Mean Y position in the back veto volume in keV" />
+    <observable name="vetoBackMeanPosZ" value="ON"
+        description="Mean Z position in the back veto volume in keV" />
+
+    <observable name="vetoTopMeanPosX" value="ON"
+        description="Mean X position in the top veto volume in keV" />
+    <observable name="vetoTopMeanPosY" value="ON"
+        description="Mean Y position in the top veto volume in keV" />
+    <observable name="vetoTopMeanPosZ" value="ON"
+        description="Mean Z position in the top veto volume in keV" />
+
+    <observable name="vetoBottomMeanPosX" value="ON"
+        description="Mean X position in the bottom veto volume in keV" />
+    <observable name="vetoBottomMeanPosY" value="ON"
+        description="Mean Y position in the bottom veto volume in keV" />
+    <observable name="vetoBottomMeanPosZ" value="ON"
+        description="Mean Z position in the bottom veto volume in keV" />
+
+    <observable name="vetoEastMeanPosX" value="ON"
+        description="Mean X position in the east veto volume in keV" />
+    <observable name="vetoEastMeanPosY" value="ON"
+        description="Mean Y position in the east veto volume in keV" />
+    <observable name="vetoEastMeanPosZ" value="ON"
+        description="Mean Z position in the east veto volume in keV" />
+
+    <observable name="vetoWestMeanPosX" value="ON"
+        description="Mean X position in the west veto volume in keV" />
+    <observable name="vetoWestMeanPosY" value="ON"
+        description="Mean Y position in the west veto volume in keV" />
+    <observable name="vetoWestMeanPosZ" value="ON"
+        description="Mean Z position in the west veto volume in keV" />
+
+    <observable name="LeadShieldingMeanPosX" value="ON"
+        description="Mean X position in the lead shielding volume in keV" />
+    <observable name="LeadShieldingMeanPosY" value="ON"
+        description="Mean Y position in the lead shielding volume in keV" />
+    <observable name="LeadShieldingMeanPosZ" value="ON"
+        description="Mean Z position in the lead shielding volume in keV" />
+
+    <observable name="mylarCatPosX" value="ON"
+        description="Mean X position in the mylar volume in keV" />
+    <observable name="mylarCatPosY" value="ON"
+        description="Mean Y position in the mylar volume in keV" />
+    <observable name="mylarCatPosZ" value="ON"
+        description="Mean Z position in the mylar volume in keV" />
+
+    <observable name="CuCathodePatternPosX" value="ON"
+        description="Mean X position in the copper cathode spider volume in keV" />
+    <observable name="CuCathodePatternPosY" value="ON"
+        description="Mean Y position in the copper cathode spider volume in keV" />
+    <observable name="CuCathodePatternPosZ" value="ON"
+        description="Mean Z position in the copper cathode spider volume in keV" />
+
+    <!-- <observable name="LeadTopMeanPosX" value="ON"
+        description="Mean X position in the top lead volume in keV" /> -->
+    <!-- <observable name="LeadTopMeanPosY" value="ON"
+        description="Mean Y position in the top lead volume in keV" /> -->
+    <!-- <observable name="LeadTopMeanPosZ" value="ON"
+        description="Mean Z position in the top lead volume in keV" /> -->
+        
+    <!-- Energy Cuts -->
+    <!-- These parameters define an energy cut. Only events within the range will be processed.  
+         If these are defined as 0 all events will be accepted. -->
+    <parameter name="lowEnergyCut" value=".00001" units="keV" />
+    <parameter name="highEnergyCut" value="0" units="keV" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestG4toHitsProcess name="G4ToHits" title="G4Hits to Hits process" >
+    <!-- We can re-define the volume considered for hits , default is "0"-->
+    <parameter name="hitVolume" value="0" />
+    <!-- <parameter name="hitStartVolume" value="0" /> --> <!--First volume =="0" (gasVolume) by default -->
+    <!-- <parameter name="hitEndVolume" value="0" /> --> <!--Last volume  =="0" (gasVolume) by default -->
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestHitsAnalysisProcess name="hitsAna" title="Hits analysis template" >
+    <observable name="energy" value="ON" />
+
+    <observable name="xmean" value="ON" />
+    <observable name="ymean" value="ON" />
+    <observable name="zmean" value="ON" />
+
+    <observable name="nHitsX" value="ON" />
+    <observable name="nHitsY" value="ON" />
+
+    <!-- This parameter allows to enable/disable the cylinder fiducialization. -->
+    <parameter name="cylinderFiducialization" value="true" />
+
+    <!-- x0 and y0 are common coordinates for prism and cylinder. -->
+    <parameter name="fiducial_x0" value="(0,0,-16)" units="mm" />
+    <parameter name="fiducial_x1" value="(0,0,16)" units="mm" />
+
+    <parameter name="fiducial_R" value="49" units="mm" />
+
+    <observable name="isInsideCylindricalVolume" value="ON" />
+    <observable name="nInsideCylindricalVolume" value="ON" />
+    <observable name="energyInsideCylindricalVolume" value="ON" />
+
+    <observable name="distanceToCylinderWall" value="ON" />
+    <observable name="distanceToCylinderTop" value="ON" />
+    <observable name="distanceToCylinderBottom" value="ON" />
+
+    <!-- This parameter allows to enable/disable the prism fiducialization. -->
+    <parameter name="prismFiducialization" value="false" />
+
+    <parameter name="fiducial_sX" value="242" units="mm" />
+    <parameter name="fiducial_sY" value="242" units="mm" />
+
+    <observable name="isInsidePrismVolume" value="OFF" />
+    <observable name="nInsidePrismVolume" value="OFF" />
+    <observable name="energyInsidePrismVolume" value="OFF" />
+
+    <observable name="distanceToPrismWall" value="OFF" />
+    <observable name="distanceToPrismTop" value="OFF" />
+    <observable name="distanceToPrismBottom" value="OFF" />
+
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestHitsToTrackProcess name="hitsToTrack" title="Hits to Track process" >
+    <parameter name="clusterDistance" value="15" units="mm" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestTrackReductionProcess name="trackReduction-Template" title="Half Template TREXDM Vessel (Bottom)" >
+    <parameter name="startingDistance" value="0.25" units="mm" />
+    <parameter name="minimumDistance" value="3" units="mm" />
+    <parameter name="distanceStepFactor" value="1.25" />
+    <parameter name="maxNodes" value="15" />
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestTrackAnalysisProcess name="tckAna" title="Track analysis template" >
+    <parameter name="nTracksXCut" value="(0,10)" />  <!-- minimum and maximum values -->
+    <parameter name="nTracksYCut" value="(0,10)" />
+    
+    <observable name="MeanRate_InHz" value="ON" />
+    <observable name="EventTimeDelay" value="ON" />
+
+    <observable name="LengthX" value="ON" />
+    <observable name="nTracksX" value="ON" />
+
+    <observable name="LengthY" value="ON" />
+    <observable name="nTracksY" value="ON" />
+
+    <observable name="LengthXYZ" value="ON" />
+    <observable name="MaxLengthXYZ" value="ON" />
+
+    <observable name="xMean" value="ON" />
+    <observable name="yMean" value="ON" />
+
+    <observable name="MaxEnXYZ" value="ON" />
+
+    <observable name="maxXMean" value="ON" />
+    <observable name="maxYMean" value="ON" />
+    <observable name="maxZMean" value="ON" />
+
+    <observable name="nTracksXYZ" value="ON" />
+    <observable name="nTracks_HE_100" value="ON"
+        description="Number of tracks with energy higher than 100 keV." />
+    <observable name="nTracks_LE_100" value="ON" 
+        description="Number of tracks with energy lower than 100 keV." />
+    <observable name="nTracks_En_3" value="ON" />
+        <!-- description="Number of tracks with energy 2.9 keV" -->
+    <parameter name="deltaEnergy" value="0.5" units="keV" />
+
+</section>
+
+<!-- ................................................................................. -->
+
+<section TRestTrackLinearizationProcess name="trackLinearization-Template" title="Half Template X-III Vessel (Bottom)" >
+    <parameter name="lengthResolution" value="2" units="mm" />
+    <parameter name="transversalResolution" value="1" units="mm" />
+</section>
+
+<!-- ................................................................................. -->
+
