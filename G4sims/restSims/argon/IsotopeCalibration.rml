@@ -20,13 +20,13 @@
     <variable name="IAXOD0_DATAPATH" value="${REST_DATAPATH}/IAXOD0" overwrite="true" />
     <variable name="IAXOD0_G4PATH" value="${IAXOD0_PATH}/G4sims/" overwrite="true" />
     <variable name="IAXOD0_GEOPATH" value="${IAXOD0_G4PATH}/geometry" overwrite="true" />
-    <variable name="IAXOD0_GEODIR" value="Argon" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
+    <variable name="IAXOD0_GEODIR" value="Argon_with_Source" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
     <variable name="IAXOD0_GAS"   value="Argon-Isobutane 2Pct 10-10E3V/cm" overwrite="true" />  <!-- options "Argon-Isobutane 2Pct 10-10E3V/cm", "Xenon-Isobutane 2Pct 10-10E3V/cm" or any other gas in gases.rml file-->
 
     <!-- Default for G4 simulations (defined in .sh script)-->
    
-    <variable name="REST_NEVENTS" value="1000000" overwrite="true" />
-    <variable name="REST_ISOTOPE" value="Cd109" overwrite="true" /> <!-- "Fe55", "Cd109" -->   
+    <variable name="REST_NEVENTS" value="10000" overwrite="true" />
+    <variable name="REST_ISOTOPE" value="Fe55" overwrite="true" /> <!-- "Fe55", "Cd109" -->   
     <variable name="REST_STEP_IN_MM" value="1" overwrite="false" />
 
     <variable name="POS_X" value="0" overwrite="false" />
@@ -62,10 +62,10 @@
 </section>
 
 
-<section TRestG4Metadata name="restG4 Simulation run"  title="Calibration_${REST_ISOTOPE}">
+<section TRestG4Metadata name="restG4 Simulation run"  title="Calibration_${REST_ISOTOPE}_test">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
-    <parameter name="gdml_file" value="IAXOD0_Setup_new.gdml"/>
+    <parameter name="gdml_file" value="IAXOD0_Setup_Vac.gdml"/>
     <parameter name="maxTargetStepSize" value="200" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
@@ -98,7 +98,7 @@
         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
+        <!-- <activeVolume name="LeadTop" chance="1"/> -->		<!-- Volume 7 -->
         <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 -->
 	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
 	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	

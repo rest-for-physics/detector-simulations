@@ -20,16 +20,16 @@
     <variable name="IAXOD0_DATAPATH" value="${REST_DATAPATH}/IAXOD0" overwrite="true" />
     <variable name="IAXOD0_G4PATH" value="${IAXOD0_PATH}/G4sims/" overwrite="true" />
     <variable name="IAXOD0_GEOPATH" value="${IAXOD0_G4PATH}/geometry" overwrite="true" />
-    <variable name="IAXOD0_GEODIR" value="Argon" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
+    <variable name="IAXOD0_GEODIR" value="Argon_split_leadShielding" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
     <variable name="IAXOD0_GAS"   value="Argon-Isobutane 2Pct 10-10E3V/cm" overwrite="true" />  <!-- options "Argon-Isobutane 2Pct 10-10E3V/cm", "Xenon-Isobutane 2Pct 10-10E3V/cm" or any other gas in gases.rml file-->
 
     <!-- Default for G4 simulations (defined in .sh script)-->
    
-    <variable name="REST_NEVENTS" value="1000000" overwrite="true" />
-    <variable name="REST_ISOTOPE" value="Pb210" overwrite="true" /> <!-- Options: "Ar39", "Pb210" -->   
-    <variable name="REST_VOLUME" value="LeadShielding" overwrite="true" /> <!-- Options: "gas", "LeadShielding" --> 
+    <variable name="REST_NEVENTS" value="1000" overwrite="true" />
+    <variable name="REST_ISOTOPE" value="Ar39" overwrite="true" /> <!-- Options: "Ar39", "Pb210" -->   
+    <variable name="REST_VOLUME" value="gas" overwrite="true" /> <!-- Options: "gas", "LeadShielding" --> 
 
-    <variable name="DIR_DATA" value="Pb210Shielding" overwrite="true" />  <!-- Options: "Ar39Gas", "Pb210Shielding" --> 
+    <variable name="DIR_DATA" value="Ar39Gas" overwrite="true" />  <!-- Options: "Ar39Gas", "Pb210Shielding" --> 
     
 </environment>
 
@@ -56,7 +56,7 @@
 <section TRestG4Metadata name="restG4 Simulation run"  title="${REST_ISOTOPE} from ${REST_VOLUME}">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
-    <parameter name="gdml_file" value="IAXOD0_Setup_new.gdml"/>
+    <parameter name="gdml_file" value="IAXOD0_Setup_SplitPb_Vac.gdml"/>
     <parameter name="maxTargetStepSize" value="200" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
@@ -90,8 +90,10 @@
         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
-        <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 --> 	
+        <!--<activeVolume name="LeadTop" chance="1"/>	-->	<!-- Volume 7 -->
+        <!-- <activeVolume name="LeadShielding" chance="1"/> -->		<!-- Volume 8 --> 
+        <activeVolume name="LeadInShielding" chance="1"/>		<!-- Volume 8 --> 
+	<activeVolume name="LeadOutShielding" chance="1"/>		<!-- Volume 8 --> 
 	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
 	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	
     </storage>

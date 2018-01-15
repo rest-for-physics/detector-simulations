@@ -12,7 +12,8 @@
 -->
 <environment>
 
-    <variable name="REST_DATAPATH" value="/media/storage/restData" overwrite="true" />
+    <!-- <variable name="REST_DATAPATH" value="/media/storage/restData" overwrite="true" /> -->
+    <variable name="REST_DATAPATH" value="/home/elisa/REST_v2_data/" overwrite="true" />
     <variable name="EXPERIMENT" value="IAXOD0" overwrite="false" />
     <variable name="VERSION" value="1.0" overwrite="false" />
     <variable name="IAXOD0_PATH" value="{HOME}/IAXOD0-REST/" overwrite="true" />
@@ -24,7 +25,7 @@
 
     <!-- Default for G4 simulations (defined in .sh script)-->
    
-    <variable name="REST_NEVENTS" value="1000000" overwrite="true" />
+    <variable name="REST_NEVENTS" value="100000" overwrite="true" />
     <variable name="REST_ISOTOPE" value="Fe55" overwrite="true" />    
     <variable name="REST_STEP_IN_MM" value="1" overwrite="false" />
 
@@ -36,7 +37,7 @@
     <variable name="ROT_Y" value="90" overwrite="false" />
     <variable name="ROT_Z" value="0" overwrite="false" />
 
-    <variable name="DIR_DATA" value="Fe55" overwrite="true" />
+    <variable name="DIR_DATA" value="Calibration" overwrite="true" />
     
 </environment>
 

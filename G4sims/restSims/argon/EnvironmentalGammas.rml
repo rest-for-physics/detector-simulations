@@ -46,7 +46,7 @@
     <parameter name="runType" value="simulation"/>
     <parameter name="runNumber" value="auto"/>
     <parameter name="runTag" value="${REST_HISTO}_ArIso"/>
-    <parameter name="runDescription" value="We launch ${REST_HISTO} histo from a ${REST_SPHERE_RADIUS}-cm radius sphere."/>
+    <parameter name="runDescription" value="We launch ${REST_HISTO} histo from a ${REST_SPHERE_RADIUS}-mm radius sphere."/>
     <parameter name="user" value="${USER}"/>
     <parameter name="verboseLevel" value="3"/>
     <parameter name="overwrite" value="off" />
@@ -57,8 +57,8 @@
 <section TRestG4Metadata name="restG4 Simulation run"  title="${REST_SPHERE_RADIUS}_Sphere_${REST_HISTO}_EnvironmentalGammas">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
-    <parameter name="gdml_file" value="IAXOD0_Setup_new.gdml"/>
-    <parameter name="maxTargetStepSize" value="200" units="um" />
+    <parameter name="gdml_file" value="IAXOD0_Setup_Vac.gdml"/>
+    <parameter name="maxTargetStepSize" value="100" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
     <!-- A member to store the component activity (and mass) are now present in G4Metadata -->
@@ -68,7 +68,7 @@
     <!-- The number of events to be simulated is now defined in TRestG4Metadata -->
     <parameter name="Nevents" value="${REST_NEVENTS}" />
     
-   <generator type="virtualSphere" position="(0,0,0)" units="cm" size="${REST_SPHERE_RADIUS}" units="cm" >
+   <generator type="virtualSphere" position="(0,0,25)" units="mm" size="${REST_SPHERE_RADIUS}" units="mm" >
         <source particle="gamma" >
             <angularDist type="isotropic" />
             <energyDist type="TH1D" file="${REST_PATH}/inputData/distributions/RadioactivityGammas.root" spctName="${REST_HISTO}" units="keV" >
@@ -83,15 +83,17 @@
 
    <storage sensitiveVolume="gas">
         <parameter name="energyRange" value="(0,5)" units="GeV" />
-         <activeVolume name="gas" chance="1"/>		 	<!-- Volume 0 -->
-         <activeVolume name="vetoFront" chance="1"/>	 	<!-- Volume 1 -->
-         <activeVolume name="vetoBack" chance="1"/>	 	<!-- Volume 2 -->
-         <activeVolume name="vetoTop" chance="1"/>	 	<!-- Volume 3 -->
-         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
-         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
-         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-         <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
-         <activeVolume name="LeadShielding" chance="1"/>	<!-- Volume 8 --> 	
+        <activeVolume name="gas" chance="1"/>		 	<!-- Volume 0 -->
+        <activeVolume name="vetoFront" chance="1"/>	 	<!-- Volume 1 -->
+        <activeVolume name="vetoBack" chance="1"/>	 	<!-- Volume 2 -->
+        <activeVolume name="vetoTop" chance="1"/>	 	<!-- Volume 3 -->
+        <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
+        <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
+        <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
+        <!-- <activeVolume name="LeadTop" chance="1"/>	-->	<!-- Volume 7 -->
+        <activeVolume name="LeadShielding" chance="1"/>	<!-- Volume 8 --> 	
+	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
+	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  
     </storage>
 
 </section>

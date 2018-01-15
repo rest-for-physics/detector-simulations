@@ -25,7 +25,7 @@
 
     <!-- Default for G4 simulations (defined in .sh script)-->
    
-    <variable name="REST_NEVENTS" value="400000" overwrite="true" />
+    <variable name="REST_NEVENTS" value="1000000" overwrite="true" />
     <variable name="REST_HISTO" value="hMEgamma" overwrite="true" /> <!-- options: "hLEgamma" (1,10)MeV, "mMEgamma" (10,100)MeV, "hMEgamma" (0.1,100)GeV -->
     <variable name="REST_STEP_IN_MM" value="1" overwrite="false" />
 
@@ -56,8 +56,8 @@
 <section TRestG4Metadata name="restG4 Simulation run"  title="MCosmicGammas">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
-    <parameter name="gdml_file" value="IAXOD0_Setup.gdml"/>
-    <parameter name="maxTargetStepSize" value="200" units="um" />
+    <parameter name="gdml_file" value="IAXOD0_Setup_Vac.gdml"/>
+    <parameter name="maxTargetStepSize" value="100" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
     <!-- A member to store the component activity (and mass) are now present in G4Metadata -->
@@ -89,7 +89,7 @@
         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
+        <!--<activeVolume name="LeadTop" chance="1"/>-->		<!-- Volume 7 -->
         <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 -->
 	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
 	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	

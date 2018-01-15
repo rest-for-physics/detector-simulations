@@ -56,8 +56,8 @@
 <section TRestG4Metadata name="restG4 Simulation run"  title="HCosmicGammas">
 
     <parameter name="geometryPath" value="${IAXOD0_GEOPATH}/${IAXOD0_GEODIR}" />
-    <parameter name="gdml_file" value="IAXOD0_Setup.gdml"/>
-    <parameter name="maxTargetStepSize" value="200" units="um" />
+    <parameter name="gdml_file" value="IAXOD0_Setup_Vac.gdml"/>
+    <parameter name="maxTargetStepSize" value="100" units="um" />
     <parameter name="subEventTimeDelay" value="100" units="us" />
 
     <!-- A member to store the component activity (and mass) are now present in G4Metadata -->
@@ -89,7 +89,7 @@
         <activeVolume name="vetoBottom" chance="1"/>	 	<!-- Volume 4 -->
         <activeVolume name="vetoEast" chance="1"/>		<!-- Volume 5 -->
         <activeVolume name="vetoWest" chance="1"/>		<!-- Volume 6 -->
-        <activeVolume name="LeadTop" chance="1"/>		<!-- Volume 7 -->
+        <!--<activeVolume name="LeadTop" chance="1"/>	-->	<!-- Volume 7 -->
         <activeVolume name="LeadShielding" chance="1"/>		<!-- Volume 8 -->
 	<activeVolume name="mylarCat" chance="1"/>		<!-- Volume 9 --> 
 	<activeVolume name="CuCathodePattern" chance="1"/>	<!-- Volume 10 -->  	
