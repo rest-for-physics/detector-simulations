@@ -39,7 +39,7 @@
 
 <section TRestHitsToSignalProcess name="hitsToSignal-Template" title="A hits to signal template" >
     <parameter name="sampling" value="0.2" units="us" />
-    <parameter name="electricField" value="1000" units="V/cm" />
+    <parameter name="electricField" value="130" units="V/cm" /> <!-- Tipically in IAXOD0, Vmesh=320, Vcathode=710V and driftDistance=3cm -->
     <!-- If specified, the following parameters will modify the properties of the gas found in TRestGas -->
     <parameter name="gasPressure" value="" />
     <parameter name="driftVelocity" value="" />
@@ -265,9 +265,9 @@
 <section TRestHitsAnalysisProcess name="hitsAna" title="Hits analysis template" >
     <observable name="energy" value="ON" />
 
-    <observable name="xmean" value="ON" />
-    <observable name="ymean" value="ON" />
-    <observable name="zmean" value="ON" />
+    <observable name="xMean" value="ON" />
+    <observable name="yMean" value="ON" />
+    <observable name="zMean" value="ON" />
 
     <observable name="nHitsX" value="ON" />
     <observable name="nHitsY" value="ON" />

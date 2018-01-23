@@ -45,7 +45,7 @@
     <parameter name="user" value="${USER}"/>
     <parameter name="verboseLevel" value="3"/>
     <parameter name="overwrite" value="off" />
-    <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION].root" />
+    <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION]_shifted.root" />
 </section>
 
 <!-- Process manager -->
@@ -54,20 +54,22 @@
     <parameter name="inputFile" value="${IAXOD0_DATAPATH}/${IAXOD0_GEODIR}/${DIR_DATA}/Run_simulation_Muons_ArIso_00006_Version_2.1.6.root">
     <parameter name="firstEntry" value="0" >
     <parameter name="lastEntry" value="0" >
-    <parameter name="eventsToProcess" value="1000" >
+    <parameter name="eventsToProcess" value="100" >
     <parameter name="pureAnalysisOutput" value="OFF" >
     
     <!-- Setting source config files -->
-    <parameter name="gasFile" value="${REST_PATH}/inputData/definitions/gases.rml" >
-    <parameter name="readoutFile" value="IAXOD0_Readout_v2_45deg.root" >
+    <parameter name="gasFile" value="${REST_PATH}/inputData/definitions/gases.rml" > 
+    <!-- <parameter name="readoutFile" value="IAXOD0_Readout_v2_45deg.root" >  -->
+    <parameter name="readoutFile" value="IAXOD0_Readout_origin.root" >
     <parameter name="processesFile" value="${IAXOD0_G4PATH}/restProcesses/G4processes.rml" >
     <parameter name="tasksFile" value="${IAXOD0_G4PATH}/restPlots/plots.rml" >
 
     <!-- Adding metadata -->
-    <addMetadata type="TRestReadout" name="IAXOD0_Readout_v2" value="ON" overwrite="true" >
-    <!-- We can modify/shift the readout plane definition that was prebuilt in a root file here using a sentence like  
-    <readoutPlane id="0" planePosition="(-96.75,-96.375,-255)" cathodePosition="(0,0,93)" />
-    -->
+    <!-- <addMetadata type="TRestReadout" name="IAXOD0_Readout_v2" value="ON" overwrite="true" > -->
+    <addMetadata type="TRestReadout" name="IAXOD0_Readout" value="ON" overwrite="true" > 
+    <!-- We can modify/shift the readout plane definition that was prebuilt in a root file here using a sentence like --> 
+    <!-- <readoutPlane id="0" planePosition="(0,-42.25,-15.6)" cathodePosition="(0,0,22.5)" />--> 
+    
     <addMetadata type="TRestGas" name="${IAXOD0_GAS}" pressure="1.4" value="ON" overwrite="true" > <!-- gas pressure units in TRestGas is atm -->
     
     <!-- Adding processes -->
