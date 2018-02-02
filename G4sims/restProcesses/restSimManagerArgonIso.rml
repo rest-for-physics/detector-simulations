@@ -22,7 +22,7 @@
     <variable name="IAXOD0_GEOPATH" value="${IAXOD0_G4PATH}/geometry" overwrite="true" />
     <variable name="IAXOD0_GEODIR" value="Argon" overwrite="true" />   <!-- options "Argon" or "Xenon" -->
     <variable name="IAXOD0_GAS" value="Argon-Isobutane 2Pct 10-10E3V/cm" overwrite="true" />  <!-- options "Argon-Isobutane 2Pct 10-10E3V/cm", "Xenon-Isobutane 2Pct 10-10E3V/cm" or any other gas in gases.rml file-->
-    <variable name="DIR_DATA" value="Muons" overwrite="true" />
+    <variable name="DIR_DATA" value="Ar39Gas" overwrite="true" />
 </environment>
 
 <!-- Global parameters -->
@@ -40,21 +40,21 @@
     <parameter name="runType" value="Track_analysis"/>
     <parameter name="readOnly" value="false" />
     <parameter name="runNumber" value="same"/>
-    <parameter name="runTag" value="Muons_ArIso"/>
+    <parameter name="runTag" value="Ar39Gas"/>
     <parameter name="runDescription" value="We launch Muons from a virtual Wall"/>
     <parameter name="user" value="${USER}"/>
     <parameter name="verboseLevel" value="3"/>
     <parameter name="overwrite" value="off" />
-    <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION]_shifted.root" />
+    <parameter name="outputFile" value="Run_[RUNTYPE]_[RUNTAG]_[RUN]_Version_[VERSION]_Fiducial5.root" />
 </section>
 
 <!-- Process manager -->
 
 <section TRestManager name="restSimAnalysis" title="restSimAnalysis">
-    <parameter name="inputFile" value="${IAXOD0_DATAPATH}/${IAXOD0_GEODIR}/${DIR_DATA}/Run_simulation_Muons_ArIso_00006_Version_2.1.6.root">
+    <parameter name="inputFile" value="${IAXOD0_DATAPATH}/${IAXOD0_GEODIR}/${DIR_DATA}/Run_simulation_Ar39fromgas_00073_Version_2.1.6.root">
     <parameter name="firstEntry" value="0" >
     <parameter name="lastEntry" value="0" >
-    <parameter name="eventsToProcess" value="100" >
+    <parameter name="eventsToProcess" value="1000000000" >
     <parameter name="pureAnalysisOutput" value="OFF" >
     
     <!-- Setting source config files -->
