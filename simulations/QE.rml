@@ -22,7 +22,7 @@
 	</TRestRun>
 
 
-	<TRestG4Metadata name="QE"  title="QE">
+	<TRestG4Metadata name="QE"  title="QE_4umMylar" verboseLevel="warning">
 
 		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
 
@@ -30,10 +30,10 @@
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="Nevents" value="10000000" />
+		<parameter name="Nevents" value="1000000" />
 
-		<!-- Only debugging pourposes -->
-		<parameter name="saveAllEvents" value="false" />
+		<parameter name="saveAllEvents" value="true" />
+		<parameter name="printProgress" value="true" />
 
 		<generator type="point" position="(0,0,100)" units="mm" > 
 			<source particle="gamma" >

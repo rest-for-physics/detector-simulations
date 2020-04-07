@@ -1,1 +1,1 @@
-- QE_Study.rml : A simple simulation where we launch photons in the 0-10keV range in order to study the Quantum Efficienct of the detecor. The QE, or detector response, will depend on the gas mixture, pressue and detector window material and thickness.
+- QE.rml : A simple simulation where we launch photons in the 0-10keV range in order to study the Quantum Efficienct of the detecor. The QE, or detector response, will depend on the gas mixture and pressure and detector window material and thickness.
