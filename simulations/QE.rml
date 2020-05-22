@@ -6,7 +6,7 @@
 		<parameter name="mainDataPath" value="${HOME}/restData/" />
 		<parameter name="verboseLevel" value="warning" /> %options are : silent, warning, info, debug
 
-		<variable name="GDML_GEOMETRY" value="../../iaxo-geometry/BabyIAXO/reference/Setup.gdml" />
+		<variable name="GDML_GEOMETRY" value="../geometry/BabyIAXO/reference/Setup.gdml" />
 	</globals>
 
 
