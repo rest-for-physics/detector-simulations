@@ -30,12 +30,12 @@
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="Nevents" value="1000000" />
+		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
 
 		<parameter name="saveAllEvents" value="true" />
 		<parameter name="printProgress" value="true" />
 
-		<generator type="point" position="(0,0,100)" units="mm" > 
+		<generator type="point" position="(0,0,100)" units="mm" >  <!-- postion="(0,0,100)" -->
 			<source particle="gamma" >
 				<angularDist type="flux" direction="(0,0,-1)" />
 				<energyDist type="flat" range="(0,10)" units="keV" />

@@ -1,10 +1,10 @@
 #include "TRestRun.h"
 
-Int_t GetQE(TString inputFile) {
+Int_t GetQE(string inputFile) {
     TRestRun* run = new TRestRun(inputFile);
     TRestAnalysisTree* aTree = run->GetAnalysisTree();
 
-    TH1D* edepHist = new TH1D("edepHist", "Energy deposited on detector", 100, 0, 10);
+    TH1D* edepHist = new TH1D("edepHist", "Energy deposited in detector", 100, 0, 10);
     TH1D* primaryHist = new TH1D("primaryHist", "Energy of generated primary", 100, 0, 10);
 
     for (int n = 0; n < run->GetEntries(); n++) {
@@ -17,6 +17,8 @@ Int_t GetQE(TString inputFile) {
         primaryHist->Fill(ePrimary);
     }
 
+
+
     FILE* f = fopen("output.txt", "wt");
     for (int n = 0; n < edepHist->GetNbinsX(); n++) {
         Double_t edepCounts = edepHist->GetBinContent(n + 1);
@@ -28,6 +30,27 @@ Int_t GetQE(TString inputFile) {
                 primaryCounts, eff, err);
     }
     fclose(f);
+
+
+    // Plot
+    
+    TCanvas *c1 = new TCanvas("c1","response matrix",800,1000);
+    TH2D *matrix_hist = new TH2D("matrix hist","response matrix",20,0,10,20,0,10);
+    matrix_hist->GetXaxis()->SetTitle("deposited Energy [keV]");
+    matrix_hist->GetYaxis()->SetTitle("primary Energy [keV]");
+    gPad->SetLogz();
+	
+    for (int n = 0; n< run->GetEntries(); n++) {
+	    run->GetEntry(n);
+
+	    Double_t eDep = aTree->GetObservableValue<Double_t>("g4Ana_totalEdep");
+	    Double_t ePrimary = aTree->GetObservableValue<Double_t>("g4Ana_energyPrimary");
+
+	    if (eDep > 0) matrix_hist->Fill(eDep,ePrimary);
+    }
+
+    matrix_hist->Draw("SURF1 zs(1)");
+
 
     return 0;
 }
