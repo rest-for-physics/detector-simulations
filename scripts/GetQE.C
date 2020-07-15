@@ -34,12 +34,17 @@ Int_t GetQE(string inputFile) {
 
     // Plot
     
-    TCanvas *c1 = new TCanvas("c1","response matrix",800,1000);
+    TCanvas *c1 = new TCanvas("c1","response matrix",800,800);
     TH2D *matrix_hist = new TH2D("matrix hist","response matrix",20,0,10,20,0,10);
     matrix_hist->GetXaxis()->SetTitle("deposited Energy [keV]");
     matrix_hist->GetYaxis()->SetTitle("primary Energy [keV]");
     gPad->SetLogz();
-	
+    //gPad->SetTheta(90);
+    //gPad->SetPhi(0);
+    //gPad->SetLeftMargin(0.15);
+    //gPad->SetBottomMargin(0.15);
+
+
     for (int n = 0; n< run->GetEntries(); n++) {
 	    run->GetEntry(n);
 
@@ -49,7 +54,7 @@ Int_t GetQE(string inputFile) {
 	    if (eDep > 0) matrix_hist->Fill(eDep,ePrimary);
     }
 
-    matrix_hist->Draw("SURF1 zs(1)");
+    matrix_hist->Draw("SURF1");
 
 
     return 0;
