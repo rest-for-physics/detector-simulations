@@ -1,0 +1,10 @@
+<TRestRun name="Background" title="${EXPERIMENT} Simulations. Version ${VERSION}.">
+    <parameter name="experiment" value="${EXPERIMENT}"/>
+    <parameter name="readOnly" value="false" />
+    <parameter name="runNumber" value="auto"/>
+    <parameter name="runDescription" value=""/>
+    <parameter name="user" value="${USER}"/>
+    <parameter name="verboseLevel" value="1"/>
+    <parameter name="overwrite" value="off" />
+    <parameter name="outputFile" value="Run[fRunNumber]_[fRunType]_[fRunTag]_[fRunUser].root" />
+</TRestRun>

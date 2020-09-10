@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!-- Globals file contains the paths to the geometry and data directories.
+	If externally unchanged, ${REST_DATAPAH} points to current directory by default. -->
+
+<restG4>
+
+	<globals file="common/globals.xml">
+
+
+	<TRestRun name="QE_Run" title="QE detector simulation.">
+		<parameter name="experiment" value="BabyIAXO"/>
+		<parameter name="runType" value="simulation"/>
+		<parameter name="runNumber" value="auto"/>
+		<parameter name="runTag" value="QE_0_10keV"/>
+		<parameter name="runDescription" value="We launch photons 0 to 10 keV."/>
+		<parameter name="user" value="${USER}"/>
+		<parameter name="overwrite" value="off" />
+		<parameter name="outputFile" value="Run_[fRunType]_[fRunTag]_[fRunNumber]_V[fVersion].root" />
+	</TRestRun>
+
+
+	<TRestG4Metadata name="QE"  title="QE_4umMylar" verboseLevel="warning">
+
+		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
+
+		<parameter name="maxTargetStepSize" value="200" units="um" />
+		<parameter name="subEventTimeDelay" value="100" units="us" />
+
+		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
+		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
+
+		<parameter name="saveAllEvents" value="true" />
+		<parameter name="printProgress" value="true" />
+
+		<generator type="point" position="(0,0,100)" units="mm" >  <!-- postion="(0,0,100)" -->
+			<source particle="gamma" >
+				<angularDist type="flux" direction="(0,0,-1)" />
+				<energyDist type="flat" range="(0,10)" units="keV" />
+			</source> 
+		</generator>
+
+		<storage sensitiveVolume="gas">
+			<parameter name="energyRange" value="(0,10)" units="keV" />
+			<activeVolume name="gas" chance="1"/>		 	<!-- Volume 0 -->
+		</storage>
+
+	</TRestG4Metadata>
+
+  <TRestPhysicsLists file="common/physics.xml" />
+
+</restG4>

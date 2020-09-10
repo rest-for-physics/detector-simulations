@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!-- Globals file contains the paths to the geometry and data directories.
+	Needs external variables: ${ISOTOPE}, ${REST_VOLUME}.
+	If externally unchanged, ${REST_DATAPAH} points to current directory by default. -->
+
+<restG4>
+
+	<globals file="common/globals.xml"/>
+
+	<TRestRun file="common/run.xml" />
+
+	<TRestG4Metadata name="${ISOTOPE}_(${POS_X},${POS_Y},${POS_Z})"  title="${ISOTOPE}_Decay" verboseLevel="warning">
+
+		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
+
+		<parameter name="maxTargetStepSize" value="200" units="um" />
+		<parameter name="subEventTimeDelay" value="100" units="us" />
+
+		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
+		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
+
+		<parameter name="saveAllEvents" value="true" />
+		<parameter name="printProgress" value="true" />
+
+		<generator type="point" position="(${POS_X},${POS_Y},${POS_Z})" units="mm" > 
+			<source particle="${ISOTOPE}" fullChain="on" >
+				<angularDist type="isotropic" />
+				<energyDist type="mono" energy="0" units="keV" />
+			</source> 
+		</generator>
+
+		<storage sensitiveVolume="gas">
+			<parameter name="energyRange" value="(0,10)" units="keV" />
+			<activeVolume name="gas" chance="1"/>		 	<!-- Volume 0 -->
+		</storage>
+
+	</TRestG4Metadata>
+
+	<TRestPhysicsLists file="common/physics.xml"/>
+
+</restG4>
