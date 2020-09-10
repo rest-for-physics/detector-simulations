@@ -21,7 +21,7 @@
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
 		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
 
-		<parameter name="saveAllEvents" value="true" />
+		<parameter name="saveAllEvents" value="false" />
 		<parameter name="printProgress" value="true" />
 
 		<generator type="volume" from="${REST_VOLUME}" > 
