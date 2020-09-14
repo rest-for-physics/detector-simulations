@@ -14,7 +14,7 @@ internal values are saved.
   </globals>
 
   <TRestRun name="Run metadata" title="REST Metadata run info (template)" verboseLevel="info">
-    <parameter name="experiment" value="BabyIAXO"/>
+    <parameter name="experiment" value="${EXPERIMENT}"/>
     <parameter name="runType" value="simulation"/>
     <parameter name="runNumber" value="auto"/> //it will find next run number from database when we use "auto"
     <parameter name="runTag" value="preserve"/>
@@ -41,7 +41,7 @@ internal values are saved.
 
   </TRestProcessRunner>
   
-  <addTask type="processEvents" value="ON" />
+  <addTask type="processEvents" value="OFF" />
 
 
 </TRestManager>

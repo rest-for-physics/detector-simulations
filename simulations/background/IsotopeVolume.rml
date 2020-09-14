@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
 <!-- Globals file contains the paths to the geometry and data directories.
-	Needs external variables: ${ISOTOPE}, ${REST_VOLUME}.
+	Needs external variables: ${REST_ISOTOPE}, ${REST_VOLUME}.
 	If externally unchanged, ${REST_DATAPAH} points to current directory by default. -->
 
 
@@ -11,7 +11,7 @@
 
 	<TRestRun file="common/run.xml" />
 
-	<TRestG4Metadata name="${ISOTOPE}_${REST_VOLUME}"  title="${ISOTOPE}_Decay" verboseLevel="warning">
+	<TRestG4Metadata name="${REST_ISOTOPE}_${REST_VOLUME}"  title="${REST_ISOTOPE}_Decay" verboseLevel="warning">
 
 		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
 
@@ -19,13 +19,13 @@
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
+		<parameter name="REST_NEVENTS" value="1000000" />  <!-- "1000000" -->
 
 		<parameter name="saveAllEvents" value="false" />
 		<parameter name="printProgress" value="true" />
 
 		<generator type="volume" from="${REST_VOLUME}" > 
-			<source particle="${ISOTOPE}" fullChain="on" >
+			<source particle="${REST_ISOTOPE}" fullChain="on" >
 				<angularDist type="isotropic" />
 				<energyDist type="mono" energy="0" units="keV" />
 			</source> 
