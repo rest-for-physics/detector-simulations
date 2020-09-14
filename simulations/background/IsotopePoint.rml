@@ -12,7 +12,7 @@
 
 	<TRestG4Metadata name="${REST_ISOTOPE}_(${POS_X},${POS_Y},${POS_Z})"  title="${REST_ISOTOPE}_Decay" verboseLevel="warning">
 
-		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
+		<parameter name="gdml_file" value="${BabyIAXO_GEOMETRY}"/>
 
 		<parameter name="maxTargetStepSize" value="200" units="um" />
 		<parameter name="subEventTimeDelay" value="100" units="us" />
