@@ -28,4 +28,16 @@ build:
       - ${CI_PROJECT_DIR}/REST_v2
       - ${CI_PROJECT_DIR}/REST_v2/build
     expire_in: 1 day
-    
+  
+simulation:
+  type: simulation
+  script:
+    - bash ${CI_PROJECT_DIR}/simulations/cosmic_neutrons/test/simulation_babyiaxo_in_between.sh
+  artifacts:
+    paths:
+      - /tmp/test_simulations
+    expire_in: 1 day
+      
+      
+      
+  
