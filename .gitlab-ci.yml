@@ -28,6 +28,7 @@ build:
 simulation:
   type: simulation
   script:
+    - source ${CI_PROJECT_DIR}/install/thisREST.sh
     - bash ${CI_PROJECT_DIR}/simulations/cosmic_neutrons/test/simulation_babyiaxo_in_between.sh
   artifacts:
     paths:
