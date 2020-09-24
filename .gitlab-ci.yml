@@ -1,5 +1,8 @@
 image: nkx1231/root6-geant4-garfield:0.4
 
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  
 stages:
   - build
   - simulation
@@ -29,6 +32,7 @@ simulation:
   type: simulation
   script:
     - source ${CI_PROJECT_DIR}/install/thisREST.sh
+    - export MAIN_DIR=${CI_PROJECT_DIR}
     - bash ${CI_PROJECT_DIR}/simulations/cosmic_neutrons/test/simulation_babyiaxo_in_between.sh
   artifacts:
     paths:
