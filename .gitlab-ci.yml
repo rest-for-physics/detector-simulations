@@ -1,5 +1,9 @@
 image: nkx1231/root6-geant4-garfield:0.4
 
+stages:
+  - build
+  - simulation
+
 build:
   type: build
   script:
@@ -20,7 +24,6 @@ build:
     paths:
       - ${CI_PROJECT_DIR}/install
     expire_in: 1 day
-
   
 simulation:
   type: simulation
