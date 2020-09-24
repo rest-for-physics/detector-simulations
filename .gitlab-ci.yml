@@ -3,6 +3,10 @@ image: nkx1231/root6-geant4-garfield:0.4
 variables:
     GIT_SUBMODULE_STRATEGY: recursive
   
+before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+  
 stages:
   - build
   - simulation
@@ -33,6 +37,7 @@ simulation:
   script:
     - source ${CI_PROJECT_DIR}/install/thisREST.sh
     - export MAIN_DIR=${CI_PROJECT_DIR}
+    - ls -lht ${MAIN_DIR}/geometry
     - bash ${CI_PROJECT_DIR}/simulations/cosmic_neutrons/test/simulation_babyiaxo_in_between.sh
   artifacts:
     paths:
