@@ -34,6 +34,7 @@ for file in os.listdir(logs_dir):
     # only delete .sh files
     if file.split(".")[-1] == "sh":
         os.remove(os.path.join(logs_dir, file))
+        pass
 
 print(f"Slurm logs directory: {logs_dir}")
 # jobs dir (scripts to launch simulations)
@@ -43,7 +44,8 @@ assert os.path.isdir(jobs_dir)
 for file in os.listdir(jobs_dir):
     # only delete .o files
     if file.split(".")[-1] == "o":
-        os.remove(os.path.join(jobs_dir, file))
+        # os.remove(os.path.join(jobs_dir, file))
+        pass
 
 print(f"Jobs directory (bash scripts to launch simulations): {jobs_dir}")
 
@@ -187,12 +189,16 @@ configurations["double"] = [
 configurations["triple"] = configurations["double"]
 configurations["quad"] = configurations["double"]
 
+data_directory = f"/home/{os.environ.get('USER')}/data"
+os.makedirs(data_directory, exist_ok=True)
+
 global_configuration = {
-    "primary_distribution": "test",
+    "primary_distribution": "virtualWall",
+    "OUTPUT_DIRECTORY": os.path.join(data_directory, "in_between_check_N1E8x50"),
 }
 
-n_events_per_job = "1E3"
-n_jobs = 10
+n_events_per_job = "1E8"
+n_jobs = 50
 
 i = 0
 processes = []
@@ -201,7 +207,7 @@ for scintillator_type in ["between"]:
 
     for environment in configurations[scintillator_type]:
         date_time = datetime.now()
-        date_time += timedelta(seconds=60)
+        # date_time += timedelta(seconds=70)
 
         for k in range(n_jobs):
 
@@ -228,6 +234,8 @@ for scintillator_type in ["between"]:
 
             for key, value in global_configuration.items():
                 bash_script += f"export {key}={value}\n"
+                if key == "OUTPUT_DIRECTORY":
+                    bash_script += f"mkdir -p {'$' + str(key)}\n"
 
             bash_script += f"{restG4_path} {rml_file}\n"
 
@@ -238,7 +246,7 @@ for scintillator_type in ["between"]:
                         continue
                     f.write(line.lstrip(" ") + "\n")
 
-            #subprocess.Popen(["sbatch", job_file])
+            subprocess.Popen(["sbatch", f"{job_file}"])
 
 
 

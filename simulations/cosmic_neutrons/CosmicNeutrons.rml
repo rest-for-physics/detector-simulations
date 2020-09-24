@@ -17,7 +17,7 @@
         <if condition="${scintillator_type}==between">
             <variable name="OUTPUT_FILE_NAME" value="babyIAXO_Between_${scintillatorSheetMiddleMaterial}${scintillatorSheetMiddleThickness}mm_Depth${vetoInsertDepth}mm_neutron_N${REST_N_EVENTS}_run${run_number}.root" overwrite="false"/>
         </if>
-        <parameter name="mainDataPath" value="/home/lobis/gitlab/iaxo-simulations/simulations/cosmic_neutrons/delete"/>
+        <parameter name="mainDataPath" value="${OUTPUT_DIRECTORY}"/>
         <parameter name="verboseLevel" value="info"/>
     </globals>
 
@@ -33,7 +33,7 @@
 
     <TRestG4Metadata name="restG4 Simulation run" title="">
 
-        <parameter name="geometryPath" value="~/gitlab/iaxo-geometry/BabyIAXO/top_veto_variations"/>
+        <parameter name="geometryPath" value="/home/${USER}/gitlab/iaxo-geometry/BabyIAXO/top_veto_variations"/>
                         
         <if condition="${scintillator_type}==single">
             <parameter name="gdml_file" value="SetupSingleTop.gdml"/>
