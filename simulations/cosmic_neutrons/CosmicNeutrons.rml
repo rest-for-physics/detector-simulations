@@ -19,6 +19,8 @@
         </if>
         <parameter name="mainDataPath" value="${OUTPUT_DIRECTORY}"/>
         <parameter name="verboseLevel" value="info"/>
+        <variable name="MAIN_DIR" value="/home/${USER}/gitlab/iaxo-simulations" overwrite="false"/>
+        <variable name="GEOMETRY_DIR" value="${MAIN_DIR}/geometry" overwrite="false"/>
     </globals>
 
     <TRestRun name="Background Model" title="">
@@ -33,7 +35,7 @@
 
     <TRestG4Metadata name="restG4 Simulation run" title="">
 
-        <parameter name="geometryPath" value="/home/${USER}/gitlab/iaxo-geometry/BabyIAXO/top_veto_variations"/>
+        <parameter name="geometryPath" value="${GEOMETRY_DIR}/BabyIAXO/top_veto_variations"/>
                         
         <if condition="${scintillator_type}==single">
             <parameter name="gdml_file" value="SetupSingleTop.gdml"/>
