@@ -1,7 +1,3 @@
 [submodule "geometry"]
 	path = geometry
-	url = git@lfna.unizar.es:iaxo/iaxo-geometry.git
-
-[submodule "readouts"]
-	path = readouts
-	url = git@lfna.unizar.es:iaxo/iaxo-readouts.git
+	url = git@github.com:IAXOUZ/detector-geometry.git
