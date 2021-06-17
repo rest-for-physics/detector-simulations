@@ -7,18 +7,7 @@
 
 	<globals file="common/globals.xml">
 
-
-	<TRestRun name="QE_Run" title="QE detector simulation.">
-		<parameter name="experiment" value="BabyIAXO"/>
-		<parameter name="runType" value="simulation"/>
-		<parameter name="runNumber" value="auto"/>
-		<parameter name="runTag" value="QE_0_10keV"/>
-		<parameter name="runDescription" value="We launch photons 0 to 10 keV."/>
-		<parameter name="user" value="${USER}"/>
-		<parameter name="overwrite" value="off" />
-		<parameter name="outputFile" value="Run_[fRunType]_[fRunTag]_[fRunNumber]_V[fVersion].root" />
-	</TRestRun>
-
+	<TRestRun file="common/run.xml" />
 
 	<TRestG4Metadata name="QE"  title="QE_4umMylar" verboseLevel="warning">
 
@@ -28,7 +17,7 @@
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="Nevents" value="1000000" />  <!-- "1000000" -->
+		<parameter name="Nevents" value="${REST_NEVENTS}" />
 
 		<parameter name="saveAllEvents" value="false" />
 		<parameter name="printProgress" value="true" />

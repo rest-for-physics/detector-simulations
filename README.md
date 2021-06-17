@@ -4,11 +4,12 @@ Please, update this README.md at the repository with detailed project informatio
 
 ### Basic project structure/contents:
 
-- **simulations**: It will contain the RML definitions that are used to launch `restG4`. We should be able to launch/test them by just going to the corresponding directory and executing `restG4 conf.rml`. Therefore, it will define in `<globals>` few default values that will allow to run the simulations with a few events.
-
-- **scripts**: Scripts that allow to extract information from a `TRestGeant4Event` and get few results or plots out of the box. If frequently used, these scripts could be upgraded and be hosted directly at the official REST macros for Geant4, at the [geant4lib](github.com/rest-for-physics/geant4lib) repository.
+- **RMLs**: It will contain the RML definitions that are used to launch `restG4`. We should be able to launch/test them by just going to the corresponding directory and executing `restG4 conf.rml`. Therefore, it will define in `<globals>` few default values that will allow to run the simulations with a few events. Those globals will be later on updated by an external script found at the *studies* directory. By default, output files will be placed at `/tmp/` directory. This can be changed at `RMLs/common/globals.xml`.
 
 - **studies**: This directory should contain ready to launch scripts directly to the NAF-IAXO batch system. We just define few variables to adjust the number of events to be launched, the isotope, the generator volume, etc. And we launch.
+
+- **scripts**: Scripts that allow to extract information from a `TRestGeant4Event`, perform quick checks, get few results or plots out of the box. If frequently used, these scripts could be upgraded and be hosted directly at the official REST macros for Geant4, at the [geant4lib](github.com/rest-for-physics/geant4lib) repository.
+
 
 ### Cloning this repository
 

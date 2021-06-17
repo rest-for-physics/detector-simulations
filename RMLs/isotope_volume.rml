@@ -9,9 +9,14 @@
 
 	<globals file="common/globals.xml"/>
 
+	<globals>
+		<variable name="REST_VOLUME" value="gas" overwrite="false" />
+		<variable name="REST_ISOTOPE" value="U238" overwrite="false" />
+	</globals>
+
 	<TRestRun file="common/run.xml" />
 
-	<TRestG4Metadata name="${REST_ISOTOPE}_${REST_VOLUME}"  title="${REST_ISOTOPE}_Decay" verboseLevel="warning">
+	<TRestG4Metadata name="${REST_ISOTOPE}_${REST_VOLUME}"  title="${REST_ISOTOPE}_${REST_VOLUME}" verboseLevel="warning">
 
 		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
 
@@ -19,7 +24,7 @@
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
 		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="REST_NEVENTS" value="1000000" />  <!-- "1000000" -->
+		<parameter name="Nevents" value="${REST_NEVENTS}" />  <!-- "1000000" -->
 
 		<parameter name="saveAllEvents" value="false" />
 		<parameter name="printProgress" value="true" />

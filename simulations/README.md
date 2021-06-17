@@ -1,6 +1,0 @@
-SIGNAL:
-- QE.rml : A simple simulation where we launch photons in the 0-10keV range in order to study the Quantum Efficienct of the detector. The QE, or detector response, will depend on the gas mixture and pressure and detector window material and thickness.
-
-BACKGROUND:
-- IsotopePoint.rml : A simulation where we consider radioactive decays from a point-like source, to study the background of the detector. It requires specifying an isotope ($ISOTOPE}) and a point of emission (${POS_X}, ${POS_Y}, ${POS_Z}).
-- IsotopePoint.rml : A simulation where we consider radioactive decays from a given volume, to study the background of the detector. It requires specifying an isotope ($ISOTOPE}) and a physical volume (${REST_VOLUME}).

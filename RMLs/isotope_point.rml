@@ -6,20 +6,27 @@
 
 <restG4>
 
-	<globals file="${BabyIAXO_SIMPATH}/common/globals.xml"/>
+	<globals file="common/globals.xml"/>
 
-	<TRestRun file="${BabyIAXO_SIMPATH}/common/run.xml" />
+	<globals>
+		<variable name="POS_X" value="0" overwrite="false" />
+		<variable name="POS_Y" value="0" overwrite="false" />
+		<variable name="POS_Z" value="0" overwrite="false" />
+
+		<variable name="REST_ISOTOPE" value="U238" overwrite="false" />
+	</globals>
+
+	<TRestRun file="common/run.xml" />
 
 
-	<TRestG4Metadata name="${REST_ISOTOPE}_(${POS_X},${POS_Y},${POS_Z})"  title="${REST_ISOTOPE}_Decay" verboseLevel="warning">
+	<TRestG4Metadata name="${REST_ISOTOPE}_(${POS_X},${POS_Y},${POS_Z})"  title="${REST_ISOTOPE}_FromPoint" verboseLevel="warning">
 
-		<parameter name="gdml_file" value="${BabyIAXO_GEOMETRY}"/>
+		<parameter name="gdml_file" value="${GDML_GEOMETRY}"/>
 
 		<parameter name="maxTargetStepSize" value="200" units="um" />
 		<parameter name="subEventTimeDelay" value="100" units="us" />
 
-		<!-- The number of events to be simulated is now defined in TRestG4Metadata -->
-		<parameter name="REST_NEVENTS" value="1000000" />  <!-- "1000000" -->
+		<parameter name="Nevents" value="${REST_NEVENTS}" /> 
 
 		<parameter name="saveAllEvents" value="false" />
 		<parameter name="printProgress" value="true" />
